@@ -72,11 +72,7 @@ Nonetheless, I found that syllabic tokenization is still the most suitable choic
 
 ![alt text](confusion_matrix.png)
 
-After tuning the hyperparameters and conducting validations, it was found that both **Logistic Regression (LR)** and **Support Vector Machines (SVM)** yielded the best testing results with **0.742**. On the other hand, Random Forest (RF) with 0.691  showed the worst performance due to potential underfitting or overfitting.
-
-In the end, **SVM** was chosen over LR for actual deployment due to its **scalability**. Although they show similar performance, as the dataset grows larger, LR may face challenges in capturing non-linear relationships of the syllables effectively. 
-
-On the other hand, SVM is capable of handling non-linear relationships and can scale well to accommodate larger datasets with well-tuned hyperparameters and the kernel trick. However, if simplicity and computational cost are the main concerns, LR might be a more suitable choice to work with a small dataset. 
+After tuning the hyperparameters and conducting validations, it was found that both **Logistic Regression (LR)** and **Support Vector Machines (SVM)** yielded the best testing results with **0.742**. On the other hand, Random Forest (RF) with 0.691  showed the worst performance due to potential underfitting.
 
 > *please consider checking out **hk_ig_clf.ipynb** for full details. Thank You!!*
 
