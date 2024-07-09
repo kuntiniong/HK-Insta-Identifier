@@ -1,14 +1,14 @@
 # Hong Kong Instagram Username Classification
 
-Hong Kong Instagram username classification that utilizes the behavior of the NLTK syllable tokenizer and linguistic features of Romanized Cantonese.
+A Hong Kong Instagram username classification project that utilizes the linguistic features of Romanized Cantonese.
 
 ## Introduction
 
-![alt text](ig-logo.png)
+<img src="images/ig-logo.png">
 
 Identifying Hong Kong Instagram users among the global userbase can greatly enhance resource allocation and marketing strategies for businesses. An implementation can be creating an Instagram advertising bot that exclusively targets and engages with users in Hong Kong. 
 
-The training data of this project is collected from [HypeAuditor](https://hypeauditor.com/) using my own web scraper **hypeauditor_scraper.py**.
+The training data of this project is collected from [HypeAuditor](https://hypeauditor.com/) using my web scraper [hypeauditor_scraper.py](hypeauditor_scraper.py).
 
 Scikit-learn's **Logistic Regression**, **Random Forest** and **SVM** are chosen as the baseline models for evaluation.
 
@@ -16,11 +16,11 @@ Scikit-learn's **Logistic Regression**, **Random Forest** and **SVM** are chosen
 
 The core principle of this classification task revolves around the behavior of the NLTK syllable tokenizer and the distinctive linguistic features of Romanized Cantonese.        
 
-Notably, the NLTK syllable tokenizer is not Cantonese-specific, but it could still provide a workaround by capturing some distinctive patterns based on the behavior of the NLTK tokenizer, albeit the lack of Cantonese word embeddings.
+Notably, the NLTK syllable tokenizer is not Cantonese-specific, but it could still provide a workaround by capturing some distinctive patterns based on the behavior of the NLTK tokenizer.
 
 The following is the visualization of the top 10 most appeared syllables in HK and Non-HK usernames:
 
-![alt text](freq_chart.png)
+<img src="images/freq_chart.png">
 
 > Terminologies:
 >
@@ -50,9 +50,9 @@ All these differences contributed as the patterns for the models to identify HK 
 
 ## Why Syllable Tokenizer?
 
-In Natural Language Processing (NLP), conventional tokens might be words, phrases, or even subword units. On the contrary, syllabic tokenization is regarded as a rather "inconsistent" tokenization technique since the phonetics in the English language is also somewhat "inconsistent", such as the "k" in "knife" and "olo" in "colonel". 
+In Natural Language Processing (NLP), conventional tokens might be words, phrases, or subword units. On the contrary, syllabic tokenization is regarded as a rather "inconsistent" tokenization technique since the phonetics in the English language is also inconsistent, such as the "k" in "knife" or "olo" in "colonel". 
 
-Nonetheless, I found that syllabic tokenization is still the most suitable choice in classifying usernames with the following reasons:
+Nonetheless, I found that syllabic tokenization is still the most suitable choice available in classifying usernames with the following reasons:
 
 1. **No whitespaces between words** 
     * Lack of whitespaces in the Instagram usernames makes the traditional tokenizers that heavily rely on whitespaces cannot work properly.
@@ -64,17 +64,17 @@ Nonetheless, I found that syllabic tokenization is still the most suitable choic
     * Usernames are not proper English vocabularies, any conventional tokenizers will not have the word embeddings for usernames, so a subword tokenizer that tokenizes a word based on the prefixes and suffixes would also not work.
 
 4. **No Cantonese-specific tokenizer**
-    * The crucial reason to use syllable tokenizer is the absence of a pretrained Romanized Cantonese tokenizer. As demonstrated in the last part, syllabic tokenization can somehow identify some unique patterns based on the behavior of the NLTK tokenizer.        
+    * The crucial reason to use syllable tokenizer is the absence of a pretrained Romanized Cantonese tokenizer. <br>As demonstrated in the last part, syllabic tokenizer can somehow still be able to identify some unique patterns, albeit the lack of Cantonese embeddings.        
 
 > *learn more in [Forbidden Spellings](https://www.youtube.com/shorts/3ipFdRfFvK4) & [NLP pipeline deep dive: Why doesn't anyone tokenize by syllables?](https://www.youtube.com/watch?v=4_KxnoMnVVs&t=2990s&ab_channel=RachaelTatman)*
 
 ## Results
 
-![alt text](confusion_matrix.png)
+<img src="images/confusion_matrix.png">
 
 After tuning the hyperparameters and conducting validations, it was found that both **Logistic Regression (LR)** and **Support Vector Machines (SVM)** yielded the best testing results with **0.742**. On the other hand, Random Forest (RF) with 0.691  showed the worst performance due to potential underfitting.
 
-> *please consider checking out **hk_ig_clf.ipynb** for full details. Thank You!!*
+> *please consider checking out [hk_ig_clf.ipynb](hk_ig_clf.ipynb) for full details. Thank You!!*
 
 
 
