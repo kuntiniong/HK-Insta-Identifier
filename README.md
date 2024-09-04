@@ -1,16 +1,18 @@
-# Hong Kong Instagram Username Classification
+# Hong Kong Instagram Username Identification
 
-A Hong Kong Instagram username classification project that utilizes the linguistic features of Romanized Cantonese.
+A natural language processing (NLP) project that aims to identify Hong Kong Instagram users based on the linguistic features of Romanized Cantonese in usernames.
 
 ## Introduction
 
 <img src="images/ig-logo.png">
 
-Identifying Hong Kong Instagram users among the global userbase can greatly enhance resource allocation and marketing strategies for businesses. An implementation can be creating an Instagram advertising bot that exclusively targets and engages with users in Hong Kong. 
+Identifying Hong Kong Instagram users among the global userbase can greatly **enhance resource allocation and social media marketing strategies for businesses**. An implementation can be creating an Instagram advertising bot that exclusively targets and engages with users in Hong Kong. 
 
-The training data of this project is collected from [HypeAuditor](https://hypeauditor.com/) using my web scraper [hypeauditor_scraper.py](hypeauditor_scraper.py).
+In this project, the objective is to classify if the Instagram username is non-HK (0) or HK (1) using the linguistc features of Romanized Cantonese and unconventional NLP techniques.
 
 Scikit-learn's **Logistic Regression**, **Random Forest** and **SVM** are chosen as the baseline models for evaluation.
+
+The [training data](datasets) is collected from [HypeAuditor](https://hypeauditor.com/) using my web scraper [hypeauditor_scraper.py](hypeauditor_scraper.py).
 
 ## How does the Classification Work?
 
@@ -50,7 +52,7 @@ All these differences contributed as the patterns for the models to identify HK 
 
 ## Why Syllable Tokenizer?
 
-In Natural Language Processing (NLP), conventional tokens might be words, phrases, or subword units. On the contrary, syllabic tokenization is regarded as a rather "inconsistent" tokenization technique since the phonetics in the English language is also inconsistent, such as the "k" in "knife" or "olo" in "colonel". 
+In NLP, conventional tokens might be words, phrases, or subword units. On the contrary, syllabic tokenization is regarded as a rather "inconsistent" tokenization technique since the phonetics in the English language is also inconsistent, such as the "k" in "knife" or "olo" in "colonel". 
 
 Nonetheless, I found that syllabic tokenization is still the most suitable choice available in classifying usernames with the following reasons:
 
