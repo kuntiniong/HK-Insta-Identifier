@@ -1,24 +1,24 @@
 # Hong Kong Instagram Username Identification
 
-A natural language processing (NLP) project that aims to identify Hong Kong Instagram users based on the linguistic features of Romanized Cantonese in usernames.
+A NLP pipeline that identifies Hong Kong Instagram users solely based on username patterns.
 
-## Introduction
+## 🌱 About
+This binary classification project identifies Hong Kong Instagram users **without** relying on **real-time scraping** or **API calls** on the users' **metadata**. Instead, my model uses the underlying syllable patterns in usernames for the classification task.
 
-<img src="images/ig-logo.png">
+An example use case for my identifier can be creating a **lightweight IG ad bot** that exclusively engages with Hong Kong IG users for social media marketing purposes.
 
-Identifying Hong Kong Instagram users among the global userbase can greatly **enhance resource allocation and social media marketing strategies for businesses**. An implementation can be creating an Instagram advertising bot that exclusively targets and engages with users in Hong Kong. 
-
-In this project, the objective is to classify if the Instagram username is non-HK (0) or HK (1) using the linguistc features of Romanized Cantonese and unconventional NLP techniques.
 
 Scikit-learn's **Logistic Regression**, **Random Forest** and **SVM** are chosen as the baseline models for evaluation.
 
-The [training data](datasets) is collected from [HypeAuditor](https://hypeauditor.com/) using my web scraper [hypeauditor_scraper.py](hypeauditor_scraper.py).
+The [username data](datasets) is collected from [hypeauditor.com](https://hypeauditor.com/) using a [Selenium-based web scraper](hypeauditor_scraper.py).
 
-## How does the Classification Work?
+> *try HK-Insta-Identifier yourself on my [streamlit app](https://hk-insta-identifier.streamlit.app/)!*
 
-The core principle of this classification task revolves around the behavior of the NLTK syllable tokenizer and the distinctive linguistic features of Romanized Cantonese.        
+## 🚀 How Does It Work?
 
-Notably, the NLTK syllable tokenizer is not Cantonese-specific, but it could still provide a workaround by capturing some distinctive patterns based on the behavior of the NLTK tokenizer.
+The core principle of this classification task revolves around the behavior of the NLTK syllable tokenizer and Romanized Cantonese linguistic features.       
+
+Notably, the NLTK syllable tokenizer is not Romanized Cantonese-specific, but it could still provide a workaround by capturing some distinctive patterns.
 
 The following are the visualizations of the distribution of repeated and unique syllables, and the top 10 most appeared syllables in HK and Non-HK usernames:
 
@@ -51,11 +51,11 @@ The following are the visualizations of the distribution of repeated and unique 
 
 All these differences contributed as the patterns for the models to identify HK usernames from non-HK usernames.
 
-## Why Syllable Tokenizer?
+## 👀 Why Syllable Tokenizer?
 
-In NLP, conventional tokens might be words, phrases, or subword units. On the contrary, syllabic tokenization is regarded as a rather "inconsistent" tokenization technique since the phonetics in the English language is also inconsistent, such as the "k" in "knife" or "olo" in "colonel". 
+In NLP, conventional tokens might be words, phrases, or subword units. On the contrary, syllabic tokenization is regarded as a rather "**inconsistent**" tokenization technique since the phonetics in the English language is also inconsistent, such as the "k" in "knife" or "olo" in "colonel". 
 
-Nonetheless, I found that syllabic tokenization is still the most suitable choice available in classifying usernames with the following reasons:
+However, I found that syllabic tokenization is still the optimal existing solution in tokenizing usernames with following reasons:
 
 1. **No whitespaces between words** 
     * Lack of whitespaces in the Instagram usernames makes the traditional tokenizers that heavily rely on whitespaces cannot work properly.
@@ -67,27 +67,30 @@ Nonetheless, I found that syllabic tokenization is still the most suitable choic
     * Usernames are not proper English vocabularies, any conventional tokenizers will not have the word embeddings for usernames, so a subword tokenizer that tokenizes a word based on the prefixes and suffixes would also not work.
 
 4. **No Romanized Cantonese-specific tokenizer**
-    * The crucial reason to use syllable tokenizer is the absence of a pretrained Romanized Cantonese tokenizer. <br>As demonstrated in the last part, syllabic tokenizer can somehow still be able to identify some unique patterns, albeit the lack of Cantonese embeddings.        
+    * The crucial reason to use syllable tokenizer is the absence of a pretrained Romanized Cantonese tokenizer. As demonstrated in the last part, syllabic tokenizer can somehow still be able to identify some unique patterns, albeit the lack of Cantonese embeddings.        
 
 > *learn more in [Forbidden Spellings](https://www.youtube.com/shorts/3ipFdRfFvK4) & [NLP pipeline deep dive: Why doesn't anyone tokenize by syllables?](https://www.youtube.com/watch?v=4_KxnoMnVVs&t=2990s&ab_channel=RachaelTatman)*
 
-## Results
+## ✅ Results
 
 <img src="images/confusion_matrix.png">
 
-After tuning the hyperparameters and conducting validations, it was found that both **Logistic Regression (LR)** and **Support Vector Machines (SVM)** yielded the best testing results with **0.742**. On the other hand, Random Forest (RF) with 0.691  showed the worst performance due to potential underfitting.
+After running a GridSearchCV, it was found that both **Logistic Regression (LR)** and **Support Vector Machines (SVM)** yielded the best testing results with **0.742**. On the other hand, Random Forest (RF) with 0.691  showed the worst performance due to potential underfitting.
 
-## Conclusion
+## ⚠️ Limitations 
 
-In this project, the **SVM** was chosen for its scalability and the ability to capture non-linear patterns in Instagram usernames. It achieved **74.2% accuracy** in identifying Hong Kong Instagram usernames by using the **linguistic features of Romanized Cantonese** and an unconventional **syllable-based tokenization** technique, highlighting the potential of alternative tokenization methods in analyzing social media account usernames.
+Username analysis is a *super super* complicated topic because of the freedom and creativity users have when choosing their usernames, for example:  
+- **Private account holders** may choose not to include their government (Cantonese) names in their usernames.  
+- **English names** are widely adopted by many Hong Kong users and greatly reduce the visibility of linguistic patterns tied to Cantonese.  
+- There is often **overlap among Romanized Chinese dialects**, making it difficult to distinguish between users from different regions.  
 
-However, usernames can be challenging to analyze due to factors such as the disinclination to include government/ Cantonese names in private accounts, the tendency of Hong Kong people to adopt English names, and the similarity in different Romanized Chinese dialects. It is important to acknowledge these nuances when interpreting the results of this project.
+So while my approach might seem effective, you have to carefully consider these factors when interpreting the results of this project.
 
-If you are interested in this project, feel free to fork this repo and explore new ideas to extend the work further - collaboration is always welcome! Possible future directions could be developing a Romanized Cantonese-specific tokenizer, and incorporating additional user profile information such as the bio for better performance.
+## ❤️ Thank You 
+If you find this project interesting, feel free to **star**🌟or **fork** this repo and explore new ideas to build on this work - collaboration is always welcome! 
 
-Thank you for taking the time to read about this project!
+Possible future directions could include developing a Romanized Cantonese-specific tokenizer and incorporating users' bios information.
 
-> *please consider checking out [hk_ig_clf.ipynb](hk_ig_clf.ipynb) for full details. Thank You!!*
+Thank you again for taking the time to learn about this project!
 
-
-
+> *please consider checking out [hk_ig_clf.ipynb](hk_ig_clf.ipynb) or [hk_ig_clf.pdf](hk_ig_clf.pdf) for full details.*
